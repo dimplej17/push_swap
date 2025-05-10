@@ -8,7 +8,8 @@ INCLUDES = -I$(LIBFT_DIR)
 
 # Define source files
 SRCS = push_swap.c \
-	   pushswap_utlis.c \
+	   utlis1.c \
+	   utlis2.c \
 
 # Define object files
 OBJS = $(SRCS:%.c=%.o)

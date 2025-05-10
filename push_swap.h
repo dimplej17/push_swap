@@ -6,7 +6,7 @@
 /*   By: djanardh <djanardh@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 14:16:36 by djanardh          #+#    #+#             */
-/*   Updated: 2025/05/09 16:32:33 by djanardh         ###   ########.fr       */
+/*   Updated: 2025/05/10 18:51:30 by djanardh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void				delete_list(t_node **lst);
 int					check_int_limit(t_node *lst);
 int					check_duplicate(t_node *lst);
 int					ft_sqroot(int n);
+int					ft_biggestN(t_node *lst);
 
 #endif
