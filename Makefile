@@ -2,14 +2,18 @@
 NAME = push_swap
 
 # Including libft & ensuring #include "libft.h" works in push_swap
-LIBFT_DIR = libft
+LIBFT_DIR = libft_42
 LIBFT = $(LIBFT_DIR)/libft.a
 INCLUDES = -I$(LIBFT_DIR)
 
 # Define source files
-SRCS = push_swap.c \
-	   utlis1.c \
-	   utlis2.c \
+SRCS =	part2_pushswap.c \
+		utils1.c \
+		utils2.c \
+		utils3.c \
+		utils4.c \
+		rules.c \
+		part1_pushswap.c \
 
 # Define object files
 OBJS = $(SRCS:%.c=%.o)

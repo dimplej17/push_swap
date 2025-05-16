@@ -1,30 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pushswap_utils.c                                   :+:      :+:    :+:   */
+/*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djanardh <djanardh@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:32:35 by djanardh          #+#    #+#             */
-/*   Updated: 2025/05/10 18:49:39 by djanardh         ###   ########.fr       */
+/*   Updated: 2025/05/12 19:50:52 by djanardh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "push_swap.h"
 
-// should return 0 if false and 1 if true
-int	check_arg_if_int(char *str)
+int	ps_lstsize(t_node *lst)
 {
 	int	count;
 
 	count = 0;
-	while (str[count] != '\0')
+	while (lst != NULL)
 	{
-		if (!(str[count] >= 48 && str[count] <= 57))
+		count++;
+		lst = lst->next;
+	}
+	return (count);
+}
+
+int	check_arg_if_int(char *str)
+{
+	int	count;
+
+	if (!str || !str[0])
+		return (0);
+	count = 0;
+	if (str[0] == '-' || str[0] == '+')
+		count++;
+	if (!str[count])
+		return (0);
+	while (str[count])
+	{
+		if (str[count] < '0' || str[count] > '9')
 			return (0);
-		else
-			count++;
+		count++;
 	}
 	return (1);
 }
@@ -62,25 +79,13 @@ void	add_back_node(t_node **lst, t_node *new)
 
 void	delete_list(t_node **lst)
 {
-	t_node	*current;
+	t_node	*tmp;
 
-	if (*lst == NULL)
-		return ;
-	current = *lst;
-	*lst = NULL;
-	if (current->next)
-		delete_list(&(current->next));
-	free(current);
-}
-int	check_int_limit(t_node *lst)
-{
-	while (lst != NULL)
+	while (*lst != NULL)
 	{
-		if (!(lst->num >= INT_MIN && lst->num <= INT_MAX))
-			return (0);
-		lst = lst->next;
+		tmp = (*lst)->next;
+		free(*lst);
+		*lst = tmp;
 	}
-	return (1);
+	*lst = NULL;
 }
-
-

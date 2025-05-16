@@ -1,21 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: djanardh <djanardh@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/12 20:10:35 by djanardh          #+#    #+#             */
+/*   Updated: 2025/05/12 20:15:13 by djanardh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "push_swap.h"
+
+int	check_int_limit(t_node *lst)
+{
+	while (lst != NULL)
+	{
+		if (!(lst->num >= INT_MIN && lst->num <= INT_MAX))
+			return (0);
+		lst = lst->next;
+	}
+	return (1);
+}
 
 // returns 0 is duplicates are found
 int	check_duplicate(t_node *lst)
 {
-	int	temp;
+	int		temp;
+	t_node	*outer;
+	t_node	*inner;
 
-	while (lst != NULL)
+	outer = lst;
+	while (outer != NULL)
 	{
-		temp = lst->num;
-		while (lst != NULL)
+		temp = outer->num;
+		inner = outer->next;
+		while (inner != NULL)
 		{
-			if (temp == lst->num)
+			if (temp == inner->num)
 				return (0);
-			lst = lst->next;
+			inner = inner->next;
 		}
-		lst = lst->next;
+		outer = outer->next;
 	}
 	return (1);
 }
@@ -40,34 +67,46 @@ int	ft_sqroot(int n)
 			guess++;
 		}
 	}
-	return (guess); // is this okay?
+	return (guess);
 }
 
-int	ft_biggestN(t_node *lst)
+int	ft_biggest_num_pos(t_node *lst)
 {
-	int	temp;
+	int		temp;
+	t_node	*current;
+	int		pos;
 
-	temp = lst->num;
+	pos = 0;
+	current = lst;
+	temp = current->num;
+	while (current != NULL)
+	{
+		if (temp < (current->num))
+			temp = current->num;
+		current = current->next;
+	}
 	while (lst != NULL)
 	{
-		if (temp > (lst->num))
-			temp = lst->num;
+		if (lst->num == temp)
+			return (pos);
+		pos++;
 		lst = lst->next;
 	}
-	return (temp);
+	return (pos);
 }
 
-t_node	*ft_copy_lst(t_node *lst)
+int	ft_biggest_num(t_node *lst)
 {
-	t_node *result;
+	int		temp;
+	t_node	*current;
 
-	if (arg_pos == 1)
-		stack_a = create_newnode(num);
-	else
+	current = lst;
+	temp = current->num;
+	while (current != NULL)
 	{
-		new = create_newnode(num);
-		add_back_node(&stack_a, new);
+		if (temp < (current->num))
+			temp = current->num;
+		current = current->next;
 	}
-
-	return (result);
+	return (temp);
 }
