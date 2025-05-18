@@ -7,12 +7,14 @@ LIBFT = $(LIBFT_DIR)/libft.a
 INCLUDES = -I$(LIBFT_DIR)
 
 # Define source files
-SRCS =	part2_pushswap.c \
+SRCS =	k_sort.c \
 		utils1.c \
 		utils2.c \
 		utils3.c \
 		utils4.c \
-		rules.c \
+		utils5.c \
+		rules1.c \
+		rules2.c \
 		part1_pushswap.c \
 
 # Define object files

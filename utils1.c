@@ -6,7 +6,7 @@
 /*   By: djanardh <djanardh@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:32:35 by djanardh          #+#    #+#             */
-/*   Updated: 2025/05/12 19:50:52 by djanardh         ###   ########.fr       */
+/*   Updated: 2025/05/16 19:23:08 by djanardh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_arg_if_int(char *str)
 		count++;
 	if (!str[count])
 		return (0);
-	while (str[count])
+	while (str[count] != '\0')
 	{
 		if (str[count] < '0' || str[count] > '9')
 			return (0);

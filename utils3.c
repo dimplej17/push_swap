@@ -6,7 +6,7 @@
 /*   By: djanardh <djanardh@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:10:45 by djanardh          #+#    #+#             */
-/*   Updated: 2025/05/12 20:33:37 by djanardh         ###   ########.fr       */
+/*   Updated: 2025/05/16 19:27:14 by djanardh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ t_node	*ft_copy_lst(t_node *lst)
 	return (result);
 }
 
-void	ft_swap(int *a, int *b)
+void	ft_swap(long *a, long *b)
 {
-	int	temp;
+	long	temp;
 
 	temp = *a;
 	*a = *b;

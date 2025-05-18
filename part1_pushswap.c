@@ -6,7 +6,7 @@
 /*   By: djanardh <djanardh@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 14:44:05 by djanardh          #+#    #+#             */
-/*   Updated: 2025/05/16 17:12:08 by djanardh         ###   ########.fr       */
+/*   Updated: 2025/05/17 20:02:08 by djanardh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,17 @@
 
 t_node	*ft_errorcheck1(char *s, t_node **stack_a)
 {
-	int		num;
+	long	num;
 	t_node	*new;
 
 	if (!check_arg_if_int(s))
 		return (ft_errorcheck2(stack_a), NULL);
-	num = ft_atoi(s);
+	num = ft_atoi_long(s);
+	if (num > INT_MAX || num < INT_MIN)
+	{
+		write(2, "Error\n", 6);
+		return (NULL);
+	}
 	new = create_newnode(num);
 	if (!new)
 		return (delete_list(stack_a), NULL);
@@ -47,13 +52,13 @@ t_node	*ft_errorcheck3(t_node **stack_a)
 	if (!check_int_limit(*stack_a))
 	{
 		delete_list(stack_a);
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		return (NULL);
 	}
 	if (!check_duplicate(*stack_a))
 	{
 		delete_list(stack_a);
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		return (NULL);
 	}
 	if (ps_lstsize(*stack_a) == 1 || ps_lstsize(*stack_a) == 0)
@@ -61,6 +66,12 @@ t_node	*ft_errorcheck3(t_node **stack_a)
 	if (is_sorted(*stack_a))
 		return (NULL);
 	*stack_a = ft_normalise(*stack_a);
+	if (ps_lstsize(*stack_a) == 2 || ps_lstsize(*stack_a) == 3
+		|| ps_lstsize(*stack_a) == 4 || ps_lstsize(*stack_a) == 5)
+	{
+		ft_smallswaps(stack_a);
+		return (*stack_a);
+	}
 	k_sort(stack_a);
 	return (*stack_a);
 }
@@ -71,7 +82,11 @@ int	handle_argument(char *arg, t_node **stack_a)
 	int		i;
 
 	if (check_space(arg) == 0)
-		return (ft_errorcheck1(arg, stack_a) != NULL);
+	{
+		if (ft_errorcheck1(arg, stack_a) == NULL)
+			return (0);
+		return (1);
+	}
 	string_ip = ft_split(arg, ' ');
 	if (!string_ip)
 		return (0);
@@ -97,8 +112,13 @@ int	main(int argc, char *argv[])
 	arg_pos = 1;
 	while (arg_pos < argc)
 	{
-		if (!handle_argument(argv[arg_pos], &stack_a))
+		if (argv[arg_pos][0] == '\0' || is_all_whitespace(argv[arg_pos]))
 			return (0);
+		if (!handle_argument(argv[arg_pos], &stack_a))
+		{
+			delete_list(&stack_a);
+			return (0);
+		}
 		arg_pos++;
 	}
 	if (!(ft_errorcheck3(&stack_a)))

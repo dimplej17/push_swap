@@ -6,7 +6,7 @@
 /*   By: djanardh <djanardh@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 20:10:35 by djanardh          #+#    #+#             */
-/*   Updated: 2025/05/12 20:15:13 by djanardh         ###   ########.fr       */
+/*   Updated: 2025/05/16 20:04:54 by djanardh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,16 @@ int	check_duplicate(t_node *lst)
 
 int	ft_sqroot(int n)
 {
-	int	temp;
 	int	guess;
 
-	if (n == 1)
-		return (1);
-	guess = 1;
-	while (guess <= (n / 2))
+	if (n < 0)
+		return (-1);
+	if (n == 0 || n == 1)
+		return (n);
+	guess = n / 2;
+	while (guess * guess != n && (guess * guess) > n)
 	{
-		temp = (guess + (n / guess)) / 2;
-		if ((temp * temp) > n)
-			guess++;
-		else
-		{
-			if (((temp + 1) * (temp + 1)) > n)
-				return (temp);
-			guess++;
-		}
+		guess = (guess + n / guess) / 2;
 	}
 	return (guess);
 }
